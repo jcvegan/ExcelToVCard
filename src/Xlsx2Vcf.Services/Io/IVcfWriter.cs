@@ -2,8 +2,8 @@
 
 namespace Xlsx2Vcf.Services.Io
 {
-    public interface IVcfWriter
-    {
-        void WriteContacts(string fileName, Contact[] contacts);
-    }
+public interface IVcfWriter
+{
+    void WriteContacts(string fileName, Contact[] contacts);
+}
 }

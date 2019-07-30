@@ -2,8 +2,8 @@
 
 namespace Xlsx2Vcf.Services.Io
 {
-    public interface IXlsxContactReader
-    {
-        Contact[] ReadContacts(string path);
-    }
+public interface IXlsxContactReader
+{
+    Contact[] ReadContacts(string path);
+}
 }
