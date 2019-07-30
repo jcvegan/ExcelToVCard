@@ -12,6 +12,7 @@ namespace Xlsx2Vcf.Services.Extensions
             services.AddScoped<IVcfWriter, VcfWriter>();
             services.AddScoped<IContactToVCardMapper, ContactToVCardMapper>();
             services.AddScoped<IStringToGenderMapper, StringToGenderMapper>();
+            services.AddScoped<IContactToAddressMapper, ContactToAddressMapper>();
             return services;
         }
     }

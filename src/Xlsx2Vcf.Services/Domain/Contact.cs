@@ -10,8 +10,9 @@ namespace Xlsx2Vcf.Services.Domain
         public string Mail { get; private set; }
         public string Gender { get; private set; }
         public DateTime? BirthDate { get; private set; }
+        public string Address { get; private set; }
 
-        public Contact(string firstName, string lastName, string phone, string mail, string gender,DateTime? birthDate)
+        public Contact(string firstName, string lastName, string phone, string mail, string gender,DateTime? birthDate,string address)
         {
             FirstName = firstName;
             LastName = lastName;
@@ -19,6 +20,7 @@ namespace Xlsx2Vcf.Services.Domain
             Mail = mail;
             Gender = gender;
             BirthDate = birthDate;
+            Address = address;
         }
 
         public override int GetHashCode()
