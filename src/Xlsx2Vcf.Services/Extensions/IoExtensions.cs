@@ -11,6 +11,7 @@ namespace Xlsx2Vcf.Services.Extensions
             services.AddScoped<IXlsxContactReader, XlsxContactReader>();
             services.AddScoped<IVcfWriter, VcfWriter>();
             services.AddScoped<IContactToVCardMapper, ContactToVCardMapper>();
+            services.AddScoped<IStringToGenderMapper, StringToGenderMapper>();
             return services;
         }
     }
