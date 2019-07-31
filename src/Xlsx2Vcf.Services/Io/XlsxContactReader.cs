@@ -14,7 +14,7 @@ namespace Xlsx2Vcf.Services.Io
         public Contact[] ReadContacts(string path, Settings settings)
         {
             var contactList = new List<Contact>();
-            using (FileStream fStream = new FileStream(path,FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+            using (FileStream fStream = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 using (SpreadsheetDocument spreadsheet = SpreadsheetDocument.Open(fStream, false))
                 {
@@ -31,13 +31,14 @@ namespace Xlsx2Vcf.Services.Io
                         DateTime? birthDate = null;
                         if (!string.IsNullOrEmpty(birthDateString))
                         {
-                            birthDate = DateTime.FromOADate(double.Parse(birthDateString)); ;
+                            birthDate = DateTime.FromOADate(double.Parse(birthDateString));
                         }
                         var gender = settings.Gender.HasValue ? GetValue(spreadsheet, cells[settings.Gender.Value]) : string.Empty;
                         var phone = settings.Phone.HasValue ? ScapeString(GetValue(spreadsheet, cells[settings.Phone.Value])) : string.Empty;
                         var mail = settings.Mail.HasValue ? GetValue(spreadsheet, cells[settings.Mail.Value]) : string.Empty;
-                        
-                        contactList.Add(new Contact(firstName, lastName, phone, mail,gender,birthDate));
+                        var address = settings.Address.HasValue ? GetValue(spreadsheet, cells[settings.Address.Value]) : string.Empty;
+
+                        contactList.Add(new Contact(firstName, lastName, phone, mail,gender,birthDate, address));
                     }
                 }
             }    

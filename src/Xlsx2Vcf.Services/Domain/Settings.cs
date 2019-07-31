@@ -8,5 +8,6 @@ namespace Xlsx2Vcf.Services.Domain
         public int? Mail { get; set; }
         public int? Gender { get; set; }
         public int? BirthDate { get; set; }
+        public int? Address { get; set; }
     }
 }
