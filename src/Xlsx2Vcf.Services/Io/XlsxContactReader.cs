@@ -11,10 +11,10 @@ namespace Xlsx2Vcf.Services.Io
 {
     public class XlsxContactReader : IXlsxContactReader {
 
-        public Contact[] ReadContacts(string path)
+        public Contact[] ReadContacts(string path, Settings settings)
         {
             var contactList = new List<Contact>();
-            using (FileStream fStream = new FileStream(path,FileMode.Open,FileAccess.Read,FileShare.ReadWrite))
+            using (FileStream fStream = new FileStream(path,FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
             {
                 using (SpreadsheetDocument spreadsheet = SpreadsheetDocument.Open(fStream, false))
                 {
@@ -25,17 +25,17 @@ namespace Xlsx2Vcf.Services.Io
                     foreach (Row row in rows)
                     {
                         var cells = row.Descendants<Cell>().ToArray();
-                        var firstName = GetValue(spreadsheet, cells[0]);
-                        var lastName = GetValue(spreadsheet, cells[1]);
-                        var birthDateString = GetValue(spreadsheet, cells[3]);
+                        var firstName = settings.FirstName.HasValue ? GetValue(spreadsheet, cells[settings.FirstName.Value]) : string.Empty;
+                        var lastName = settings.LastName.HasValue ? GetValue(spreadsheet, cells[settings.LastName.Value]) : string.Empty;
+                        var birthDateString = settings.BirthDate.HasValue ? GetValue(spreadsheet, cells[settings.BirthDate.Value]) : string.Empty;
                         DateTime? birthDate = null;
                         if (!string.IsNullOrEmpty(birthDateString))
                         {
                             birthDate = DateTime.FromOADate(double.Parse(birthDateString)); ;
                         }
-                        var gender = GetValue(spreadsheet, cells[4]);
-                        var phone = ScapeString(GetValue(spreadsheet, cells[5]));
-                        var mail = GetValue(spreadsheet, cells[7]);
+                        var gender = settings.Gender.HasValue ? GetValue(spreadsheet, cells[settings.Gender.Value]) : string.Empty;
+                        var phone = settings.Phone.HasValue ? ScapeString(GetValue(spreadsheet, cells[settings.Phone.Value])) : string.Empty;
+                        var mail = settings.Mail.HasValue ? GetValue(spreadsheet, cells[settings.Mail.Value]) : string.Empty;
                         
                         contactList.Add(new Contact(firstName, lastName, phone, mail,gender,birthDate));
                     }

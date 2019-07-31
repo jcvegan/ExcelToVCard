@@ -2,18 +2,18 @@
 using Microsoft.Extensions.DependencyInjection;
 using Xlsx2Vcf.Services.Extensions;
 using Xlsx2Vcf.Services.Io;
+using Xlsx2Vcf.Services.Map;
 
 namespace Xlsx2Vcf
 {
     class Program
     {
-        static void Main(string[] args)
+        static void Main(string source, string target, string configuration)
         {
-            Console.WriteLine("Hello World!");
             var serviceProvider = BuildServices();
-            var contacts = serviceProvider.GetRequiredService<IXlsxContactReader>().ReadContacts(args[0]);
-            serviceProvider.GetRequiredService<IVcfWriter>().WriteContacts("Sociedad 49.vcf",contacts);
-            Console.ReadLine();
+            var settings = serviceProvider.GetRequiredService<IStringToSettingsMapper>().ToSettings(configuration);
+            var contacts = serviceProvider.GetRequiredService<IXlsxContactReader>().ReadContacts(source, settings);
+            serviceProvider.GetRequiredService<IVcfWriter>().WriteContacts(target, contacts);
         }
 
         private static IServiceProvider BuildServices()
