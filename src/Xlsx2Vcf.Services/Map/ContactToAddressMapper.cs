@@ -3,20 +3,20 @@ using Xlsx2Vcf.Services.Domain;
 
 namespace Xlsx2Vcf.Services.Map
 {
-    public class ContactToAddressMapper : IContactToAddressMapper
+public class ContactToAddressMapper : IContactToAddressMapper
+{
+    public Address[] ToAddress(Contact contact)
     {
-        public Address[] ToAddress(Contact contact)
+        if (string.IsNullOrEmpty(contact.Address))
+            return null;
+        return new Address[]
         {
-            if (string.IsNullOrEmpty(contact.Address))
-                return null;
-            return new Address[]
+            new Address()
             {
-                new Address()
-                {
-                    Country = "Perú", 
-                    Street = contact.Address
-                }, 
-            };
-        }
+                Country = "Perú",
+                Street = contact.Address
+            },
+        };
     }
+}
 }
