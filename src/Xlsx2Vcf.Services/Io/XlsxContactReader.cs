@@ -32,7 +32,6 @@ namespace Xlsx2Vcf.Services.Io
                         if (!string.IsNullOrEmpty(birthDateString))
                         {
                             birthDate = DateTime.FromOADate(double.Parse(birthDateString));
-                            ;
                         }
                         var gender = settings.Gender.HasValue ? GetValue(spreadsheet, cells[settings.Gender.Value]) : string.Empty;
                         var phone = settings.Phone.HasValue ? ScapeString(GetValue(spreadsheet, cells[settings.Phone.Value])) : string.Empty;
