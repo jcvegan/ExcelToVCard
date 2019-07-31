@@ -12,7 +12,7 @@ namespace Xlsx2Vcf.Services.Domain
         public DateTime? BirthDate { get; private set; }
         public string Address { get; private set; }
 
-        public Contact(string firstName, string lastName, string phone, string mail, string gender,DateTime? birthDate,string address)
+        public Contact(string firstName, string lastName, string phone, string mail, string gender, DateTime? birthDate, string address)
         {
             FirstName = firstName;
             LastName = lastName;
